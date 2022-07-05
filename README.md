@@ -18,7 +18,6 @@ The following required functionality is completed:
 The following extensions are implemented:
 
 * [x] Custom colors selected
-* [x] used mathematical forlmula
 * [x] color changes in theme
 
 ## Video Walkthrough
