@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TipTap</string>
+    <string name="tip_percent">24%</string>
+    <string name="base_text">Base</string>
+    <string name="Tip_text">Tip</string>
+    <string name="total_text">Total</string>
+    <string name="text_footer">Made with ❤ by aman</string>
+    <string name="bill_amount_hint">Bill Amount</string>
+</resources>
