@@ -18,11 +18,13 @@ private const val INITIAL_TIP_PERCENT = 15
 class MainActivity : AppCompatActivity() {
 
     private lateinit var etBaseAmount: EditText
+    private lateinit var etSpitNumber: EditText
     private lateinit var seekBarTip: SeekBar
     private lateinit var tvTipAmount: TextView
     private lateinit var tvTotalAmount: TextView
     private lateinit var tvTipPercent: TextView
     private lateinit var tvTipDescription: TextView
+    private lateinit var tvAmountForEach: TextView
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +37,12 @@ class MainActivity : AppCompatActivity() {
         tvTotalAmount = findViewById(R.id.tvTotalAmount)
         tvTipPercent = findViewById(R.id.tvTipPercent)
         tvTipDescription = findViewById(R.id.tvTipDescription)
+        etSpitNumber = findViewById(R.id.etSplitNumber)
+        tvAmountForEach = findViewById(R.id.tvAmountForEach)
 
         seekBarTip.progress = INITIAL_TIP_PERCENT
         tvTipPercent.text = "$INITIAL_TIP_PERCENT%"
         changeDescriptionText(INITIAL_TIP_PERCENT)
-//        changeDescriptionColor(INITIAL_TIP_PERCENT)
 
         seekBarTip.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -65,6 +68,36 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        etSpitNumber.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+            override fun afterTextChanged(p0: Editable?) {
+                computeSplitBill()
+            }
+        })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun computeSplitBill() {
+        if(etSpitNumber.text.isEmpty()){
+            tvAmountForEach.text = ""
+            return
+        }else if (tvTotalAmount.text.isEmpty()){
+            tvAmountForEach.text = ""
+            return
+        }
+//        get number of person
+        val noOfPerson = etSpitNumber.text.toString().toDouble()
+        val totalAmount = tvTotalAmount.text.toString().toDouble()
+
+//        calculate split amount
+        val splitAmountt = totalAmount / noOfPerson
+
+//        Update UI
+        tvAmountForEach.text = "%.2f".format(splitAmountt)
     }
 
     private fun changeDescriptionText(tipPercent: Int) {

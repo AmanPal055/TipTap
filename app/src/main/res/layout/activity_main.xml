@@ -39,18 +39,18 @@
         app:layout_constraintEnd_toEndOf="@+id/tvBaseLabel"
         app:layout_constraintTop_toBottomOf="@+id/tvTipPercent" />
 
+
+    <!-- Views on right side -->
     <TextView
         android:id="@+id/tvTotalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="21dp"
         android:text="@string/total_text"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tvBaseLabel"
-        app:layout_constraintTop_toBottomOf="@+id/tvTip" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSpitText" />
 
-
-    <!-- Views on right side -->
     <EditText
         android:id="@+id/etBaseAmount"
         android:layout_width="wrap_content"
@@ -89,10 +89,9 @@
         android:id="@+id/tvTotalAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#616161"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvTotalLabel"
-        app:layout_constraintStart_toStartOf="@+id/tvTipAmount"
-        app:layout_constraintTop_toTopOf="@+id/tvTotalLabel"
+        app:layout_constraintStart_toStartOf="@+id/etSplitNumber"
         tools:text="103.4" />
 
     <TextView
@@ -118,4 +117,48 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBarTip"
         app:layout_goneMarginTop="8sp"
         tools:text="Acceptable" />
+
+    <TextView
+        android:id="@+id/tvSpitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="@string/split_in"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBaseLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvTip" />
+
+    <EditText
+        android:id="@+id/etSplitNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:autofillHints="phone"
+        android:hint="@string/enter_number_of_person"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSpitText"
+        app:layout_constraintStart_toEndOf="@+id/tvSpitText"
+        app:layout_constraintStart_toStartOf="@+id/tvTipAmount"
+        app:layout_constraintTop_toTopOf="@+id/tvSpitText" />
+
+    <TextView
+        android:id="@+id/tvTotalAmtForEach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="@string/bill_for_each_person"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvBaseLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalLabel" />
+
+    <TextView
+        android:id="@+id/tvAmountForEach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTotalAmtForEach"
+        app:layout_constraintStart_toEndOf="@+id/tvTotalAmtForEach"
+        app:layout_constraintTop_toTopOf="@+id/tvTotalAmtForEach"
+        tools:text="100" />
 </androidx.constraintlayout.widget.ConstraintLayout>

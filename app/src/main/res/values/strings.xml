@@ -6,4 +6,7 @@
     <string name="total_text">Total</string>
     <string name="text_footer">Made with ❤ by aman</string>
     <string name="bill_amount_hint">Bill Amount</string>
+    <string name="split_in">Split In</string>
+    <string name="enter_number_of_person">Enter Number of Person</string>
+    <string name="bill_for_each_person">Bill for Each Person</string>
 </resources>
