@@ -69,10 +69,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeDescriptionText(tipPercent: Int) {
         val tipDescription = when (tipPercent){
-            in 0..9 -> "Poor"
-            in 10..14 -> "Acceptable"
-            in 15..24 -> "Good"
-            else -> {"Amazing"}
+            in 0..9 -> "Poor\uD83D\uDE44"
+            in 10..14 -> "Acceptable\uD83D\uDE42"
+            in 15..24 -> "Good☺️"
+            else -> {"Amazing\uD83D\uDE0D"}
         }
         tvTipDescription.text = tipDescription
 
