@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import java.sql.Types.NULL
 
 private const val TAG = "MainActivity"
 private const val INITIAL_TIP_PERCENT = 15
@@ -60,7 +62,8 @@ class MainActivity : AppCompatActivity() {
         etBaseAmount.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
 
             override fun afterTextChanged(p0: Editable?) {
                 Log.i(TAG,"afterTextChanged $p0")
@@ -75,6 +78,9 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
             override fun afterTextChanged(p0: Editable?) {
+                if (computeTipAndTotal().equals(false)){
+                    return
+                }
                 computeSplitBill()
             }
         })
@@ -82,22 +88,20 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun computeSplitBill() {
-        if(etSpitNumber.text.isEmpty()){
-            tvAmountForEach.text = ""
-            return
-        }else if (tvTotalAmount.text.isEmpty()){
+        if (etSpitNumber.text.isEmpty() || etSpitNumber.text.toString().toDouble() == 0.0){
             tvAmountForEach.text = ""
             return
         }
 //        get number of person
-        val noOfPerson = etSpitNumber.text.toString().toDouble()
+
+        var noOfPerson = etSpitNumber.text.toString().toDouble()
         val totalAmount = tvTotalAmount.text.toString().toDouble()
 
 //        calculate split amount
-        val splitAmountt = totalAmount / noOfPerson
+        val splitAmount = totalAmount / noOfPerson
 
 //        Update UI
-        tvAmountForEach.text = "%.2f".format(splitAmountt)
+        tvAmountForEach.text = "%.2f".format(splitAmount)
     }
 
     private fun changeDescriptionText(tipPercent: Int) {
@@ -118,11 +122,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun computeTipAndTotal() {
+    private fun computeTipAndTotal(): Boolean {
         if (etBaseAmount.text.isEmpty()){
             tvTipAmount.text = ""
             tvTotalAmount.text = ""
-            return
+            return false
         }
         // 1. Get value of tip percent and edit text
         val tipPercent = seekBarTip.progress
@@ -135,6 +139,6 @@ class MainActivity : AppCompatActivity() {
         // 3. update the UI
         tvTipAmount.text = "%.2f".format(tipAmount)
         tvTotalAmount.text = "%.2f".format(totalAmount)
-
+        return true
     }
 }
